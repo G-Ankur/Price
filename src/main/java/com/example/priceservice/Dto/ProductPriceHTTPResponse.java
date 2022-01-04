@@ -3,6 +3,7 @@ package com.example.priceservice.Dto;
 import lombok.Data;
 
 @Data
-public class PriceResponse {
+public class ProductPriceHTTPResponse {
     private Integer price;
+    private String product;
 }
