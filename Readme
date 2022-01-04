@@ -1,0 +1,6 @@
+1. Install JDK 1.8
+2. Install Maven 3.8
+3. Clone Spring Boot project into your System
+4. open command Prompt
+5. Go to the Project Directory using cd {$Project_Home} command.
+6. run mvn spring-boot:run command to run the springBoot application

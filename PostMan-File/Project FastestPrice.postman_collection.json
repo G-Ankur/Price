@@ -1,0 +1,45 @@
+{
+  "id": "2eefbe55-bff3-2a2b-c336-0458c1d24706",
+  "name": "Project FastestPrice",
+  "description": "",
+  "order": [
+    "e92d4dd3-babf-23de-08ab-05d43a4f66ae"
+  ],
+  "folders": [],
+  "folders_order": [],
+  "timestamp": 1641325251576,
+  "owner": 0,
+  "public": false,
+  "requests": [
+    {
+      "id": "e92d4dd3-babf-23de-08ab-05d43a4f66ae",
+      "headers": "x-user: 1\n",
+      "headerData": [
+        {
+          "key": "x-user",
+          "value": "1",
+          "description": "",
+          "enabled": true
+        }
+      ],
+      "url": "http://localhost:8080/app/iphone/price",
+      "queryParams": [],
+      "pathVariables": {},
+      "pathVariableData": [],
+      "preRequestScript": null,
+      "method": "GET",
+      "collectionId": "2eefbe55-bff3-2a2b-c336-0458c1d24706",
+      "data": null,
+      "dataMode": "params",
+      "name": "http://localhost:8080/app/iphone/price",
+      "description": "",
+      "descriptionFormat": "html",
+      "time": 1641325256336,
+      "version": 2,
+      "responses": [],
+      "tests": null,
+      "currentHelper": "normal",
+      "helperAttributes": {}
+    }
+  ]
+}

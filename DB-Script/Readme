@@ -1,0 +1,5 @@
+1. Install MySQL
+2. Create project Schema and select it as default schema.
+3. then run the create table script mentioned in Product_Table.sql File
+
+Done... :-)
