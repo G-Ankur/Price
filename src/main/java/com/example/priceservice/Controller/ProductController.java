@@ -18,7 +18,7 @@ public class ProductController {
 
     @GetMapping("app/{product}/price")
     public PriceResponse getPrice(@PathVariable("product") String product, @RequestHeader(name = "X-User", required = false) String user) {
-        logger.info("UserId : " + user);
+//        logger.info("UserId : " + user);
         PriceResponse priceResponse = null;
         Header.setUserId(user);
         priceResponse = priceService.getPrice(product);

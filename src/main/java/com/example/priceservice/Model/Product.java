@@ -20,7 +20,7 @@ public class Product {
     private Date currentTime;
 
     @Column(name = "responsetime")
-    private Date responseTime;
+    private long responseTime;
 
     @Column(name = "userid")
     private String userId;

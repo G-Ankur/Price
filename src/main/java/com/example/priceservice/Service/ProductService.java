@@ -24,52 +24,57 @@ public class ProductService {
     public PriceResponse getPrice(String product) {
         PriceResponse priceResponse = new PriceResponse();  //creating object of PriceResponse
         //Checking if the Product is already in db or not
-        Product productExist = productDAO.findByUserIdAndProductCode(Header.getUserId(), product);
-        if (productExist != null) {
-            //if the record exist then return the price of it
-            priceResponse.setPrice(productExist.getPrice());
-            return priceResponse;
-        }
+//        Product productExist = productDAO.findByUserIdAndProductCode(Header.getUserId(), product);
+//        if (productExist != null) {
+//            //if the record exist then return the price of it
+//            priceResponse.setPrice(productExist.getPrice());
+//            return priceResponse;
+//        }
 
         //Setting Value of Product in Model for DB Insertion using DAO
         Product productData = new Product();
         productData.setProductCode(product);
         productData.setCurrentTime(new Date());
         productData.setUserId(Header.getUserId());
-        Integer amazonPrice = getSourcePrice(product, ProjectConstant.AMAZON);
-        logger.info("Amazon Price : " + amazonPrice);
-        Integer flipkartPrice = getSourcePrice(product, ProjectConstant.FLIPKART);
-        logger.info("Flipkart Price : " + flipkartPrice);
+        ProductPriceHTTPResponse amazonPriceResponse = getSourcePrice(product, ProjectConstant.AMAZON);
+//        logger.info("Amazon Price : " + amazonPriceResponse.getPrice() + " Elapsed Time : "+ amazonPriceResponse.getElapsedTime());
+        ProductPriceHTTPResponse flipkartPriceResponse = getSourcePrice(product, ProjectConstant.FLIPKART);
+//        logger.info("Flipkart Price : " + flipkartPriceResponse.getPrice() + " Elapsed Time : " + flipkartPriceResponse.getElapsedTime());
         //Comparing Source Price and taking lesser Price Source in DB
-        if (amazonPrice > flipkartPrice) {
-            productData.setResponseTime(new Date());
+        if (amazonPriceResponse.getElapsedTime() > flipkartPriceResponse.getElapsedTime()) {
+            productData.setResponseTime(flipkartPriceResponse.getElapsedTime());
             productData.setSource(ProjectConstant.FLIPKART);
-            productData.setPrice(flipkartPrice);
-            productDAO.saveAndFlush(productData);               //Saving Data in DB
-            priceResponse.setPrice(flipkartPrice);              // Setting less price in Response
+            productData.setPrice(flipkartPriceResponse.getPrice());
+            productDAO.saveAndFlush(productData);                                   //Saving Data in DB
+            priceResponse.setPrice(flipkartPriceResponse.getPrice());              // Setting less price in Response
         } else {
-            productData.setResponseTime(new Date());
+            productData.setResponseTime(amazonPriceResponse.getElapsedTime());
             productData.setSource(ProjectConstant.AMAZON);
-            productData.setPrice(amazonPrice);
-            productDAO.saveAndFlush(productData);               //Saving Data in DB
-            priceResponse.setPrice(amazonPrice);                // Setting less price in Response
+            productData.setPrice(amazonPriceResponse.getPrice());
+            productDAO.saveAndFlush(productData);                                   //Saving Data in DB
+            priceResponse.setPrice(amazonPriceResponse.getPrice());                // Setting less price in Response
         }
-        logger.info("response : " + priceResponse.getPrice());
+//        logger.info("response : " + priceResponse.getPrice());
         return priceResponse;
     }
 
-    public Integer getSourcePrice(String product, String source) {
+    public ProductPriceHTTPResponse getSourcePrice(String product, String source) {
         ProductPriceHTTPResponse entity = null;
         RestTemplate restTemplate = new RestTemplate();
         try {
             String url = "https://price-" + source + ".free.beeceptor.com/service/" + product + "/price";
-            logger.info("URL : " + url);
+//            logger.info("URL : " + url);
             URI uri = new URI(url);
+            long startTime = System.currentTimeMillis();
             entity = restTemplate.getForObject(uri, ProductPriceHTTPResponse.class);
+            long elapsedTime = System.currentTimeMillis() - startTime;
+//            logger.info("Source : " + source);
+//            logger.info("StartTime : " + startTime);
+//            logger.info("elapsedTime : " + elapsedTime);
+            entity.setElapsedTime(elapsedTime);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return entity.getPrice();
+        return entity;
     }
-
 }

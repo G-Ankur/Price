@@ -6,4 +6,5 @@ import lombok.Data;
 public class ProductPriceHTTPResponse {
     private Integer price;
     private String product;
+    private long elapsedTime;
 }
