@@ -1,6 +1,12 @@
 1. Install JDK 1.8
 2. Install Maven 3.8
-3. Clone Spring Boot project into your System
-4. open command Prompt
-5. Go to the Project Directory using cd {$Project_Home} command.
-6. run mvn spring-boot:run command to run the springBoot application
+3. Install MySQL Server
+4. Create a Schema named project
+5. Run the DB Script provided in DBScript Directory on GitHub itself
+6. Clone Spring Boot project into your System
+7. Open command Prompt
+8. Go to the Project Directory using cd {$Project_Home} command
+9. run mvn spring-boot:run command in command Prompt to run the springBoot application
+10.Install Postman and import the PostMan file provided in PostMan-File Directory on GitHub itself
+
+Done :-)
