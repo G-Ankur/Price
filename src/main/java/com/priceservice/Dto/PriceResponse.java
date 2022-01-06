@@ -1,4 +1,4 @@
-package com.example.priceservice.Dto;
+package com.priceservice.Dto;
 
 import lombok.Data;
 

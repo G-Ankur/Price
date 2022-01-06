@@ -1,4 +1,4 @@
-package com.example.priceservice.Model;
+package com.priceservice.Model;
 
 import lombok.Getter;
 import lombok.Setter;

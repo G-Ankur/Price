@@ -1,4 +1,4 @@
-package com.example.priceservice.Dto;
+package com.priceservice.Dto;
 
 import lombok.Data;
 
@@ -6,5 +6,4 @@ import lombok.Data;
 public class ProductPriceHTTPResponse {
     private Integer price;
     private String product;
-    private long elapsedTime;
 }

@@ -1,6 +1,6 @@
-package com.example.priceservice.Dao;
+package com.priceservice.Dao;
 
-import com.example.priceservice.Model.Product;
+import com.priceservice.Model.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

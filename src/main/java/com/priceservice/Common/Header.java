@@ -1,4 +1,4 @@
-package com.example.priceservice.Common;
+package com.priceservice.Common;
 
 import org.springframework.stereotype.Component;
 
